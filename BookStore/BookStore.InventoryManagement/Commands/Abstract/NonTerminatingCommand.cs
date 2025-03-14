@@ -1,4 +1,6 @@
 ﻿
+using BookStore.InventoryManagement.UserInterface.Abstract;
+
 namespace BookStore.InventoryManagement.Commands.Abstract
 {
     /// <summary>
@@ -9,6 +11,6 @@ namespace BookStore.InventoryManagement.Commands.Abstract
         /// <summary>
         /// В конструкторе сразу передаем параметр, что комманда не терминальная
         /// </summary>
-        protected NonTerminatingCommand() : base(commandIsTerminating: false) { }
+        protected NonTerminatingCommand(IUserInterface userInterface) : base(false, userInterface) { }
     }
 }
