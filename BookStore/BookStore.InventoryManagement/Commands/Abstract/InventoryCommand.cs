@@ -1,5 +1,6 @@
-﻿
-using System.Runtime.CompilerServices;
+﻿#region Usings
+using BookStore.InventoryManagement.UserInterface.Abstract;
+#endregion
 
 namespace BookStore.InventoryManagement.Commands.Abstract
 {
@@ -17,11 +18,22 @@ namespace BookStore.InventoryManagement.Commands.Abstract
 
         #endregion
 
+        #region Protected Properties
+
+        /// <summary>
+        /// Пользовательский интерфейс для команды
+        /// </summary>
+        protected IUserInterface UserInterface { get; }
+
+        #endregion
+
         #region Constructors
 
-        internal InventoryCommand(bool commandIsTerminating)
+        internal InventoryCommand(bool commandIsTerminating, IUserInterface userInterface)
         {
             _isTerminatedCommand = commandIsTerminating;
+
+            UserInterface = userInterface;
         }
 
         #endregion
@@ -59,6 +71,20 @@ namespace BookStore.InventoryManagement.Commands.Abstract
         /// </summary>
         /// <returns></returns>
         internal abstract bool InternalCommand();
+
+        #endregion
+
+        #region Internal Methods
+
+        /// <summary>
+        /// Получение значения параметра от пользовательского интерфейса
+        /// </summary>
+        /// <param name="paramName"></param>
+        /// <returns></returns>
+        internal string GetParameter(string paramName)
+        {
+            return UserInterface.ReadValue($"Enter {paramName}");
+        }
 
         #endregion
     }
