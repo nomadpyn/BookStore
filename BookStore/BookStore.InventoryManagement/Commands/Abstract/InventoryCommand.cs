@@ -31,11 +31,9 @@ namespace BookStore.InventoryManagement.Commands.Abstract
         /// </summary>
         /// <param name="shouldQuit"></param>
         /// <returns></returns>
-        public bool RunCommand(out bool shouldQuit)
+        public (bool wasSuccess, bool shouldQuit) RunCommand()
         {
-            shouldQuit = _isTerminatedCommand;
-
-            return InternalCommand();
+            return (InternalCommand(), _isTerminatedCommand);
         }
 
         #endregion
