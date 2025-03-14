@@ -1,4 +1,6 @@
 ﻿
+using System.Runtime.CompilerServices;
+
 namespace BookStore.InventoryManagement.Commands.Abstract
 {
     /// <summary>
@@ -33,6 +35,18 @@ namespace BookStore.InventoryManagement.Commands.Abstract
         /// <returns></returns>
         public (bool wasSuccess, bool shouldQuit) RunCommand()
         {
+            // если команда с параметрами то необходимо получить параметры
+            if (this is IParameteriesCommand parameteriesCommand)
+            {
+                var allParameters = false;
+
+                while (allParameters == false)
+                {
+                    // получение параметров
+                    allParameters = parameteriesCommand.GetParameters();
+                }
+            }
+
             return (InternalCommand(), _isTerminatedCommand);
         }
 
