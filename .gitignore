@@ -3,3 +3,5 @@ BookStore/BookStore.InventoryManagement/bin
 BookStore/BookStore.InventoryManagement/obj
 BookStore/BookStore.InventoryManagementClient/bin
 BookStore/BookStore.InventoryManagementClient/obj
+BookStore/BookStore.InventoryManagement.Tests/bin
+BookStore/BookStore.InventoryManagement.Tests/obj
