@@ -1,6 +1,7 @@
 ﻿#region Usings
 using BookStore.InventoryManagement.Context.Abstract;
 using BookStore.InventoryManagement.Models;
+using System.Collections.Concurrent;
 #endregion
 
 namespace BookStore.InventoryManagement.Context
@@ -12,13 +13,52 @@ namespace BookStore.InventoryManagement.Context
     {
         #region Private Properties
 
-        private readonly Dictionary<string, Book> _books;
+        /// <summary>
+        /// Словарь для хранения книг
+        /// </summary>
+        private readonly ConcurrentDictionary<string, Book> _books;
+
+        /// <summary>
+        /// Объект одиночки
+        /// </summary>
+        private static InventoryContext? _context;
+
+        /// <summary>
+        /// Объект для синхронизации потоков
+        /// </summary>
+        private static readonly object _lock = new();
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Возвращает единственный экземпляр
+        /// </summary>
+        public static InventoryContext Singleton
+        {
+            get
+            {
+                if (_context == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_context == null)
+                        {
+                            _context = new();
+                        }
+                    }
+                }
+
+                return _context;
+            }
+        }
 
         #endregion
 
         #region Constructors
 
-        public InventoryContext() 
+        protected InventoryContext()
         {
             _books = new();
         }
@@ -43,10 +83,8 @@ namespace BookStore.InventoryManagement.Context
         /// <returns></returns>
         public bool AddBook(string name)
         {
-            _books.Add(name, new Book(name));
-
-            return true;
-        }        
+            return _books.TryAdd(name, new Book(name));
+        }
 
         /// <summary>
         /// Обновление количества книг
@@ -56,7 +94,10 @@ namespace BookStore.InventoryManagement.Context
         /// <returns></returns>
         public bool UpdateQuantity(string name, int quantity)
         {
-            _books[name].Quantity += quantity;
+            lock (_lock)
+            {
+                _books[name].Quantity += quantity;
+            }
 
             return true;
         }
