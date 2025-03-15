@@ -24,5 +24,16 @@ namespace BookStore.InventoryManagement.Models
         public int Quantity { get; set; }
 
         #endregion
+
+        #region Constructors
+
+        public Book() { }
+
+        public Book(string name)
+        {
+            Name = name;
+        }
+
+        #endregion
     }
 }
