@@ -16,7 +16,7 @@ namespace BookStore.InventoryManagement.Commands
         /// <summary>
         /// Имя книги
         /// </summary>
-        public string? InventoryName { get; private set; }
+        public string InventoryName { get; private set; } = String.Empty;
 
         #endregion
 
@@ -38,13 +38,13 @@ namespace BookStore.InventoryManagement.Commands
 
         #endregion
 
-        #region Internal Methods
+        #region Protected Methods
 
         /// <summary>
         /// Выполнение команды
         /// </summary>
         /// <returns></returns>
-        internal override bool InternalCommand()
+        protected override bool InternalCommand()
         {
             return _context.AddBook(InventoryName);
         }

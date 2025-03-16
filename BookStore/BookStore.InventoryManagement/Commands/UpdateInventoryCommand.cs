@@ -1,7 +1,8 @@
-﻿
+﻿#region Usings
 using BookStore.InventoryManagement.Commands.Abstract;
 using BookStore.InventoryManagement.Context.Abstract;
 using BookStore.InventoryManagement.UserInterface.Abstract;
+#endregion
 
 namespace BookStore.InventoryManagement.Commands
 {
@@ -24,7 +25,7 @@ namespace BookStore.InventoryManagement.Commands
         /// <summary>
         /// Имя книги
         /// </summary>
-        internal string? InventoryName { get; private set; }
+        internal string InventoryName { get; private set; } = String.Empty;
 
         /// <summary>
         /// Количество книг
@@ -67,13 +68,13 @@ namespace BookStore.InventoryManagement.Commands
 
         #endregion
 
-        #region Internal Methods
+        #region protected Methods
 
         /// <summary>
         /// Выполнение команды
         /// </summary>
         /// <returns></returns>
-        internal override bool InternalCommand()
+        protected override bool InternalCommand()
         {
             return _context.UpdateQuantity(InventoryName, Quantity);
         }
