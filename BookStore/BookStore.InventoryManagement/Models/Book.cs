@@ -35,5 +35,18 @@ namespace BookStore.InventoryManagement.Models
         }
 
         #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Вывод в строковом представлении
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Name,-30}\tКоличество:{Quantity}";
+        }
+
+        #endregion
     }
 }
