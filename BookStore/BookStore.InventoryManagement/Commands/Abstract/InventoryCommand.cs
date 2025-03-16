@@ -64,13 +64,13 @@ namespace BookStore.InventoryManagement.Commands.Abstract
 
         #endregion
 
-        #region Internal Abstract Methods
+        #region Protected Abstract Methods
 
         /// <summary>
         /// Абстрактный метод для реализации в наследниках
         /// </summary>
         /// <returns></returns>
-        internal abstract bool InternalCommand();
+        protected abstract bool InternalCommand();
 
         #endregion
 

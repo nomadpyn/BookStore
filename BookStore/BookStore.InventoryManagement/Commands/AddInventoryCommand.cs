@@ -1,5 +1,6 @@
 ﻿#region Usings
 using BookStore.InventoryManagement.Commands.Abstract;
+using BookStore.InventoryManagement.Context.Abstract;
 using BookStore.InventoryManagement.UserInterface.Abstract;
 #endregion
 
@@ -10,22 +11,42 @@ namespace BookStore.InventoryManagement.Commands
     /// </summary>
     internal class AddInventoryCommand : NonTerminatingCommand, IParameteriesCommand
     {
-        #region Internal Properties
+        #region Public Properties
 
-        internal string? InventoryName { get; private set; }
+        /// <summary>
+        /// Имя книги
+        /// </summary>
+        public string InventoryName { get; private set; } = String.Empty;
+
+        #endregion
+
+        #region Private Properties
+
+        /// <summary>
+        /// Контекст данных
+        /// </summary>
+        private readonly IInventoryContext _context;
 
         #endregion
 
         #region Constructors
 
-        internal AddInventoryCommand(IUserInterface userInterface) : base(userInterface) { }
+        internal AddInventoryCommand(IUserInterface userInterface, IInventoryContext context) : base(userInterface)
+        {
+            _context = context;
+        }
 
         #endregion
 
-        #region Internal Methods
-        internal override bool InternalCommand()
+        #region Protected Methods
+
+        /// <summary>
+        /// Выполнение команды
+        /// </summary>
+        /// <returns></returns>
+        protected override bool InternalCommand()
         {
-            throw new NotImplementedException();
+            return _context.AddBook(InventoryName);
         }
 
         #endregion
@@ -44,7 +65,7 @@ namespace BookStore.InventoryManagement.Commands
             }
 
             return !string.IsNullOrWhiteSpace(InventoryName);
-        }       
+        }
 
         #endregion
     }

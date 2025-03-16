@@ -22,7 +22,7 @@ namespace BookStore.InventoryManagement.Commands
         /// Переопределение тела команды
         /// </summary>
         /// <returns></returns>
-        internal override bool InternalCommand()
+        protected override bool InternalCommand()
         {
             UserInterface.WriteMessage("Спасибо что пользовались системой управления BookStore!");
 
