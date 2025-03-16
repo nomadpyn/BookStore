@@ -20,7 +20,7 @@ namespace BookStore.InventoryManagement.Context.Abstract
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public bool AddBook(string name);
+        public bool AddBook(string? name);
 
         /// <summary>
         /// Обновление количества книг
