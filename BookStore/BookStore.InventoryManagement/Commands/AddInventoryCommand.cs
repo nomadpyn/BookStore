@@ -13,12 +13,18 @@ namespace BookStore.InventoryManagement.Commands
     {
         #region Public Properties
 
+        /// <summary>
+        /// Имя книги
+        /// </summary>
         public string? InventoryName { get; private set; }
 
         #endregion
 
         #region Private Properties
 
+        /// <summary>
+        /// Контекст данных
+        /// </summary>
         private readonly IInventoryContext _context;
 
         #endregion
@@ -33,6 +39,11 @@ namespace BookStore.InventoryManagement.Commands
         #endregion
 
         #region Internal Methods
+
+        /// <summary>
+        /// Выполнение команды
+        /// </summary>
+        /// <returns></returns>
         internal override bool InternalCommand()
         {
             return _context.AddBook(InventoryName);

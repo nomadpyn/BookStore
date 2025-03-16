@@ -28,6 +28,6 @@ namespace BookStore.InventoryManagement.Context.Abstract
         /// <param name="name"></param>
         /// <param name="quantity"></param>
         /// <returns></returns>
-        public bool UpdateQuantity(string name, int quantity);
+        public bool UpdateQuantity(string? name, int quantity);
     }
 }
