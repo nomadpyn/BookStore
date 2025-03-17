@@ -6,7 +6,7 @@ namespace BookStore.InventoryManagement.CommandFactory.Abstract
     /// <summary>
     /// Интерфейс для фабрики команд (паттерн Фабрика)
     /// </summary>
-    interface IInventoryCommandFactory
+    public interface IInventoryCommandFactory
     {
         /// <summary>
         /// Получение команды из строки ввода
