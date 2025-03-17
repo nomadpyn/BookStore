@@ -83,7 +83,7 @@ namespace BookStore.InventoryManagement.Commands.Abstract
         /// <returns></returns>
         internal string GetParameter(string paramName)
         {
-            return UserInterface.ReadValue($"Enter {paramName}");
+            return UserInterface.ReadValue($"Ввод {paramName}:");
         }
 
         #endregion

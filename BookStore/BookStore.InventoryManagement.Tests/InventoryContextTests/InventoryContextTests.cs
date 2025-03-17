@@ -31,7 +31,7 @@ namespace BookStore.InventoryManagement.Tests.InventoryContextTests
 
             Task.WaitAll(tasks.ToArray());
 
-            var context = InventoryContext.Singleton;
+            var context = InventoryContext.Instance;
 
             var Books = context.GetBooks();
 
@@ -53,7 +53,7 @@ namespace BookStore.InventoryManagement.Tests.InventoryContextTests
         {
             return Task.Run(() =>
             {
-                var context = InventoryContext.Singleton;
+                var context = InventoryContext.Instance;
 
                 Assert.IsTrue(context.AddBook(bookName));
             });
@@ -69,7 +69,7 @@ namespace BookStore.InventoryManagement.Tests.InventoryContextTests
         {
             return Task.Run(() =>
             {
-                var context = InventoryContext.Singleton;
+                var context = InventoryContext.Instance;
 
                 Assert.IsTrue(context.UpdateQuantity(bookName,quantity));
             });

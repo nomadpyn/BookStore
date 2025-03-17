@@ -44,7 +44,7 @@ namespace BookStore.InventoryManagement.Models
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Name,-30}\tКоличество:{Quantity}";
+            return $"{Name} \tКоличество:{Quantity}";
         }
 
         #endregion

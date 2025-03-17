@@ -35,7 +35,7 @@ namespace BookStore.InventoryManagement.Context
         /// <summary>
         /// Возвращает единственный экземпляр
         /// </summary>
-        public static InventoryContext Singleton
+        public static InventoryContext Instance
         {
             get
             {
