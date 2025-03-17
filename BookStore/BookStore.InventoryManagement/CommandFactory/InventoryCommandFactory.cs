@@ -48,7 +48,7 @@ namespace BookStore.InventoryManagement.CommandFactory
         /// <returns></returns>
         public InventoryCommand GetCommand(string input)
         {
-            return input switch
+            return input.ToLower() switch
             {
                 "q" or "quit" => new QuitCommand(_userInterface),
                 "a" or "addinventory" => new AddInventoryCommand(_userInterface, _context),
