@@ -63,7 +63,7 @@ namespace BookStore.InventoryManagement.Commands
                 Quantity = _quantity;
             }
 
-            return string.IsNullOrWhiteSpace(InventoryName) && Quantity != 0;
+            return !string.IsNullOrWhiteSpace(InventoryName) && Quantity != 0;
         }
 
         #endregion
