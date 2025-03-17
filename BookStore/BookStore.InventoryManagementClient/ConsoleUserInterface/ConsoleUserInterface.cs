@@ -2,12 +2,12 @@
 using BookStore.InventoryManagement.UserInterface.Abstract;
 #endregion
 
-namespace BookStore.InventoryManagement.UserInterface
+namespace BookStore.InventoryManagementClient.ConsoleUserInterface
 {
     /// <summary>
     /// Класс для работы с пользователем через консоль
     /// </summary>
-    class ConsoleUserInterface : IUserInterface
+    public class ConsoleUserInterface : IUserInterface
     {
         #region Public Methods
 
