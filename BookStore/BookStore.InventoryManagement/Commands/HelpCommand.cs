@@ -5,6 +5,9 @@ using BookStore.InventoryManagement.UserInterface.Abstract;
 
 namespace BookStore.InventoryManagement.Commands
 {
+    /// <summary>
+    /// Команда для вывода справки (как работать с программой)
+    /// </summary>
     internal class HelpCommand : NonTerminatingCommand
     {
         #region Constructors
