@@ -27,7 +27,7 @@ namespace BookStore.InventoryManagementClient.CatalogService
 
         #region Constuctors
 
-        internal CatalogService(IUserInterface userInterface, IInventoryCommandFactory factory)
+        public CatalogService(IUserInterface userInterface, IInventoryCommandFactory factory)
         {
             _userInterface = userInterface;
             _commandFactory = factory;

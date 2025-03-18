@@ -1,26 +1,36 @@
 ﻿#region Usings
 using BookStore.InventoryManagement.CommandFactory;
+using BookStore.InventoryManagement.CommandFactory.Abstract;
+using BookStore.InventoryManagement.UserInterface.Abstract;
+using BookStore.InventoryManagementClient.CatalogService;
+using BookStore.InventoryManagementClient.CatalogService.Abstract;
 using BookStore.InventoryManagementClient.ConsoleUserInterface;
+using Microsoft.Extensions.DependencyInjection;
 #endregion
 
-
-Console.WriteLine("Добро пожаловать в BookStore!");
-
-var userInterface = new ConsoleUserInterface();
-var commandFactory = new InventoryCommandFactory(userInterface);
-
-var response = commandFactory.GetCommand("?").RunCommand();
-
-while (!response.shouldQuit)
+class Program
 {
-    // look at this mistake with the ToLower()
-    var input = userInterface.ReadValue("> ").ToLower();
-    var command = commandFactory.GetCommand(input);
-
-    response = command.RunCommand();
-
-    if (!response.wasSuccess)
+    private static void Main(string[] args)
     {
-        userInterface.WriteMessage("Enter ? to view options.");
+        IServiceCollection services = new ServiceCollection();
+
+        ConfigureServices(services);
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        var service = serviceProvider.GetService<ICatalogService>();
+
+        service.Run();
+    }
+
+    private static void ConfigureServices(IServiceCollection services)
+    {
+        services.AddTransient<IUserInterface, ConsoleUserInterface>();
+        services.AddTransient<IInventoryCommandFactory, InventoryCommandFactory>();
+
+
+        services.AddTransient<ICatalogService, CatalogService>();
     }
 }
+
+
