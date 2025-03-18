@@ -26,7 +26,7 @@ namespace BookStore.InventoryManagement.Tests.CommandsTests
             var result = command.RunCommand();
 
             Assert.IsFalse(result.shouldQuit, "Неизвестно не завершающая команда");
-            Assert.IsTrue(result.wasSuccess, "Неизвестно не показана успешно");
+            Assert.IsFalse(result.wasSuccess, "Неизвестная команда не успешна");
         }
 
         #endregion

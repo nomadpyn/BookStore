@@ -26,7 +26,7 @@ namespace BookStore.InventoryManagement.Commands
         {
             UserInterface.WriteWarning("Команда не распознана");
 
-            return true;
+            return false; ;
         }
 
         #endregion
