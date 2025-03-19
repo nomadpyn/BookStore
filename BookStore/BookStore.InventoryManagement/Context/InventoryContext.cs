@@ -9,7 +9,7 @@ namespace BookStore.InventoryManagement.Context
     /// <summary>
     /// Контекст для данных (временно в памяти приложения)
     /// </summary>
-    internal class InventoryContext : IInventoryContext
+    public class InventoryContext : IInventoryContext
     {
         #region Private Properties
 
@@ -19,46 +19,15 @@ namespace BookStore.InventoryManagement.Context
         private readonly ConcurrentDictionary<string, Book> _books;
 
         /// <summary>
-        /// Объект одиночки
-        /// </summary>
-        private static InventoryContext? _context;
-
-        /// <summary>
         /// Объект для синхронизации потоков
         /// </summary>
         private static readonly object _lock = new();
 
         #endregion
 
-        #region Public Properties
-
-        /// <summary>
-        /// Возвращает единственный экземпляр
-        /// </summary>
-        public static InventoryContext Instance
-        {
-            get
-            {
-                if (_context == null)
-                {
-                    lock (_lock)
-                    {
-                        if (_context == null)
-                        {
-                            _context = new();
-                        }
-                    }
-                }
-
-                return _context;
-            }
-        }
-
-        #endregion
-
         #region Constructors
 
-        protected InventoryContext()
+        public InventoryContext()
         {
             _books = new();
         }

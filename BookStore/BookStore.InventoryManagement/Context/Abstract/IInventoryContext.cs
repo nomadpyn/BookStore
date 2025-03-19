@@ -7,7 +7,7 @@ namespace BookStore.InventoryManagement.Context.Abstract
     /// <summary>
     /// Интерфейс для контекста данных
     /// </summary>
-    internal interface IInventoryContext
+    public interface IInventoryContext
     {
         /// <summary>
         /// Получение списка всех книг
