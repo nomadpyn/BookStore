@@ -1,6 +1,8 @@
 ﻿#region Usings
 using BookStore.InventoryManagement.CommandFactory;
 using BookStore.InventoryManagement.CommandFactory.Abstract;
+using BookStore.InventoryManagement.Context;
+using BookStore.InventoryManagement.Context.Abstract;
 using BookStore.InventoryManagement.UserInterface.Abstract;
 using BookStore.InventoryManagementClient.CatalogService;
 using BookStore.InventoryManagementClient.CatalogService.Abstract;
@@ -25,6 +27,7 @@ class Program
 
     private static void ConfigureServices(IServiceCollection services)
     {
+        services.AddSingleton<IInventoryContext, InventoryContext>();
         services.AddTransient<IUserInterface, ConsoleUserInterface>();
         services.AddTransient<IInventoryCommandFactory, InventoryCommandFactory>();
 

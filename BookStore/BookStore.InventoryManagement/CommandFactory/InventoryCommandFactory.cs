@@ -30,11 +30,11 @@ namespace BookStore.InventoryManagement.CommandFactory
 
         #region Constructors
 
-        public InventoryCommandFactory(IUserInterface userInterface)
+        public InventoryCommandFactory(IUserInterface userInterface, IInventoryContext context)
         {
             _userInterface = userInterface;
 
-            _context = InventoryContext.Instance;
+            _context = context;
         }
 
         #endregion

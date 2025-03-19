@@ -63,9 +63,13 @@ namespace BookStore.InventoryManagement.Context
         /// <returns></returns>
         public bool UpdateQuantity(string name, int quantity)
         {
+            if (!_books.TryGetValue(name, out Book? value))
+
+                return false;
+
             lock (_lock)
             {
-                _books[name].Quantity += quantity;
+                value.Quantity += quantity;
             }
 
             return true;
