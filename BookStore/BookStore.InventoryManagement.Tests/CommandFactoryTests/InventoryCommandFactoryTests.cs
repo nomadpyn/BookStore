@@ -2,7 +2,10 @@
 using BookStore.InventoryManagement.CommandFactory;
 using BookStore.InventoryManagement.CommandFactory.Abstract;
 using BookStore.InventoryManagement.Commands;
+using BookStore.InventoryManagement.Context.Abstract;
+using BookStore.InventoryManagement.Context;
 using BookStore.InventoryManagement.Tests.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 #endregion
 
 namespace BookStore.InventoryManagement.Tests.CommandFactoryTests
@@ -13,6 +16,8 @@ namespace BookStore.InventoryManagement.Tests.CommandFactoryTests
         #region Private Properties
 
         private IInventoryCommandFactory? Factory;
+
+        private ServiceProvider? Services { get; set; }
 
         #endregion
 
@@ -26,7 +31,14 @@ namespace BookStore.InventoryManagement.Tests.CommandFactoryTests
                 new List<string>(),
                 new List<string>());
 
-            Factory = new InventoryCommandFactory(expectedInterface);
+            IServiceCollection services = new ServiceCollection();
+            services.AddSingleton<IInventoryContext, InventoryContext>();
+
+            Services = services.BuildServiceProvider();
+
+            var context = Services.GetService<IInventoryContext>();
+
+            Factory = new InventoryCommandFactory(expectedInterface, context);
         }
 
         #endregion
