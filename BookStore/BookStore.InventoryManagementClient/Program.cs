@@ -22,7 +22,7 @@ class Program
 
         var service = serviceProvider.GetService<ICatalogService>();
 
-        service.Run();
+        service?.Run();
     }
 
     private static void ConfigureServices(IServiceCollection services)

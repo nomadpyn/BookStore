@@ -1,5 +1,7 @@
 ﻿#region Usings
 using BookStore.InventoryManagement.Context;
+using BookStore.InventoryManagement.Context.Abstract;
+using Microsoft.Extensions.DependencyInjection;
 #endregion
 
 namespace BookStore.InventoryManagement.Tests.InventoryContextTests
@@ -7,6 +9,21 @@ namespace BookStore.InventoryManagement.Tests.InventoryContextTests
     [TestClass]
     public class InventoryContextTests
     {
+        #region Private Properties
+
+        private ServiceProvider? Services { get; set; }
+
+        #endregion
+
+        [TestInitialize]
+        public void StartUp()
+        {
+            IServiceCollection services = new ServiceCollection();
+            services.AddSingleton<IInventoryContext, InventoryContext>();
+
+            Services = services.BuildServiceProvider();
+        }
+
         [TestMethod]
         public void MaintainBooks_Successful()
         {
@@ -31,11 +48,11 @@ namespace BookStore.InventoryManagement.Tests.InventoryContextTests
 
             Task.WaitAll(tasks.ToArray());
 
-            var context = InventoryContext.Instance;
+            var context = Services?.GetService<IInventoryContext>();
 
-            var Books = context.GetBooks();
+            var Books = context?.GetBooks();
 
-            Assert.IsTrue(Books.Count == 30);
+            Assert.IsTrue(Books?.Count == 30);
 
             foreach (var book in Books)
             {
@@ -53,9 +70,9 @@ namespace BookStore.InventoryManagement.Tests.InventoryContextTests
         {
             return Task.Run(() =>
             {
-                var context = InventoryContext.Instance;
+                var context = Services?.GetService<IInventoryContext>();
 
-                Assert.IsTrue(context.AddBook(bookName));
+                Assert.IsTrue(context?.AddBook(bookName));
             });
         }
 
@@ -69,9 +86,9 @@ namespace BookStore.InventoryManagement.Tests.InventoryContextTests
         {
             return Task.Run(() =>
             {
-                var context = InventoryContext.Instance;
+                var context = Services?.GetService<IInventoryContext>();
 
-                Assert.IsTrue(context.UpdateQuantity(bookName,quantity));
+                Assert.IsTrue(context?.UpdateQuantity(bookName,quantity));
             });
         }
     }
