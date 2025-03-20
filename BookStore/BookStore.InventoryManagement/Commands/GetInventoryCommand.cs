@@ -16,7 +16,7 @@ namespace BookStore.InventoryManagement.Commands
         /// <summary>
         /// Контекст данных
         /// </summary>
-        private readonly IInventoryWriteContext _context;
+        private readonly IInventoryReadContext _context;
 
         #endregion
 
