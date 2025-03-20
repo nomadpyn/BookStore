@@ -27,12 +27,25 @@ class Program
 
     private static void ConfigureServices(IServiceCollection services)
     {
-        services.AddSingleton<IInventoryContext, InventoryContext>();
+        ConfigureInventoryContext(services);
+
+
         services.AddTransient<IUserInterface, ConsoleUserInterface>();
         services.AddTransient<IInventoryCommandFactory, InventoryCommandFactory>();
 
 
         services.AddTransient<ICatalogService, CatalogService>();
+    }
+
+    private static IServiceCollection ConfigureInventoryContext(IServiceCollection services)
+    {
+        var context = new InventoryContext();
+
+        services.AddSingleton<IInventoryReadContext, InventoryContext>(p => context);
+        services.AddSingleton<IInventoryWriteContext, InventoryContext>(p => context);
+        services.AddSingleton<IInventoryContext, InventoryContext>(p => context);
+
+        return services;
     }
 }
 
