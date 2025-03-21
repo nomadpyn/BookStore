@@ -1,4 +1,13 @@
+using BooksStore.Web.Context;
+using BooksStore.Web.Repository;
+using BooksStore.Web.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<InventoryContext>(context =>
+    context.UseNpgsql(builder.Configuration.GetConnectionString("BookStoreDb")));
+builder.Services.AddTransient<IInventoryRepository, InventoryRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
