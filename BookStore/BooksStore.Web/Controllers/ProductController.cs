@@ -1,4 +1,5 @@
 ﻿#region Usings
+using BooksStore.Web.Extensions;
 using BooksStore.Web.Models;
 using BooksStore.Web.Repository.Abstract;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,8 @@ namespace BooksStore.Web.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            return View(_repository.GetProducts());
+            var products = _repository.GetProducts().ToProductVM();
+            return View(products);
         }
 
         /// <summary>
@@ -44,7 +46,8 @@ namespace BooksStore.Web.Controllers
         /// <returns></returns>
         public IActionResult Details(Guid Id)
         {
-            return View(_repository.GetProduct(Id));
+            var product = _repository.GetProduct(Id).ToProductVM();
+            return View();
         }
 
         /// <summary>

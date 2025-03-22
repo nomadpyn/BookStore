@@ -35,7 +35,7 @@
         /// <summary>
         /// Id категории продукта
         /// </summary>
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         /// <summary>
         /// Наименование категории продукта
