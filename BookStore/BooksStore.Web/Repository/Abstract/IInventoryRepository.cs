@@ -21,9 +21,9 @@ namespace BooksStore.Web.Repository.Abstract
 
         public IEnumerable<Category> GetCategories();
 
-        public void AddCategory(Category product);
+        public void AddCategory(Category category);
 
-        public void UpdateCategory(Guid Id, Category product);
+        public void UpdateCategory(Guid Id, Category category);
 
         public void DeleteCategory(Guid Id);
 

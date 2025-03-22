@@ -1,6 +1,8 @@
 ﻿#region Usings
+using BooksStore.Web.Context;
 using BooksStore.Web.Models;
 using BooksStore.Web.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
 #endregion
 
 namespace BooksStore.Web.Repository
@@ -10,54 +12,132 @@ namespace BooksStore.Web.Repository
     /// </summary>
     public class InventoryRepository : IInventoryRepository
     {
-        void IInventoryRepository.AddCategory(Category product)
-        {
-            throw new NotImplementedException();
+        #region Private Properties
+
+        private readonly InventoryContext _inventoryContext;
+
+        #endregion
+
+        #region Constuctors
+
+        public InventoryRepository(InventoryContext inventoryContext) 
+        { 
+            _inventoryContext = inventoryContext; 
         }
 
-        void IInventoryRepository.AddProduct(Product product)
+        #endregion
+
+        #region Public Methods
+        
+        /// <summary>
+        /// Добавление новой категории
+        /// </summary>
+        /// <param name="category"></param>
+        public void AddCategory(Category category)
         {
-            throw new NotImplementedException();
+            _inventoryContext.Categories.Add(category);
+            _inventoryContext.SaveChanges();
         }
 
-        void IInventoryRepository.DeleteCategory(Guid Id)
+        /// <summary>
+        /// Добавление нового продукта
+        /// </summary>
+        /// <param name="product"></param>
+        public void AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            _inventoryContext.Products.Add(product);
+            _inventoryContext.SaveChanges();
         }
 
-        void IInventoryRepository.DeleteProduct(Guid Id)
+        /// <summary>
+        /// Удаление категории
+        /// </summary>
+        /// <param name="Id"></param>
+        public void DeleteCategory(Guid Id)
         {
-            throw new NotImplementedException();
+            var category = _inventoryContext.Categories.FirstOrDefault(x => x.Id == Id);
+            if (category is not null)
+            {
+                _inventoryContext.Remove(category);
+                _inventoryContext.SaveChanges();
+            }
         }
 
-        IEnumerable<Category> IInventoryRepository.GetCategories()
+        /// <summary>
+        /// Удаление продукта
+        /// </summary>
+        /// <param name="Id"></param>
+        public void DeleteProduct(Guid Id)
         {
-            throw new NotImplementedException();
+            var product = _inventoryContext.Products.FirstOrDefault(x => x.Id == Id);
+            if (product is not null)
+            {
+                _inventoryContext.Remove(product);
+                _inventoryContext.SaveChanges();
+            }
         }
 
-        Category IInventoryRepository.GetCategory(Guid Id)
+        /// <summary>
+        /// Получение всех категории
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Category> GetCategories()
         {
-            throw new NotImplementedException();
+            return _inventoryContext.Categories.ToList();
         }
 
-        Product IInventoryRepository.GetProduct(Guid Id)
+        /// <summary>
+        /// Получение одной категории
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public Category GetCategory(Guid Id)
         {
-            throw new NotImplementedException();
+            return _inventoryContext.Categories.FirstOrDefault(x => x.Id == Id);
         }
 
-        IEnumerable<Product> IInventoryRepository.GetProducts()
+        /// <summary>
+        /// Получение одного продукта
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public Product GetProduct(Guid Id)
         {
-            throw new NotImplementedException();
+            return _inventoryContext.Products.Include(c => c.Category).FirstOrDefault(x => x.Id == Id);
         }
 
-        void IInventoryRepository.UpdateCategory(Guid Id, Category product)
+        /// <summary>
+        /// Получение всех продуктов
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Product> GetProducts()
         {
-            throw new NotImplementedException();
+            return _inventoryContext.Products.Include(c => c.Category).ToList();
         }
 
-        void IInventoryRepository.UpdateProduct(Guid Id, Product product)
+        /// <summary>
+        /// Обновление категории
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="category"></param>
+        public void UpdateCategory(Guid Id, Category category)
         {
-            throw new NotImplementedException();
+            _inventoryContext.Update(category);
+            _inventoryContext.SaveChanges();
         }
+
+        /// <summary>
+        /// Обновление продукта
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="product"></param>
+        public void UpdateProduct(Guid Id, Product product)
+        {
+            _inventoryContext.Update(product);
+            _inventoryContext.SaveChanges();
+
+        }
+
+        #endregion
     }
 }
