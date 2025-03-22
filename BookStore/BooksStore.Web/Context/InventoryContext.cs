@@ -1,8 +1,13 @@
-﻿using BooksStore.Web.Models;
+﻿#region Usings
+using BooksStore.Web.Models;
 using Microsoft.EntityFrameworkCore;
+#endregion
 
 namespace BooksStore.Web.Context
 {
+    /// <summary>
+    /// Контекст доступа к данным
+    /// </summary>
     public class InventoryContext : DbContext
     {
         #region Public Properties
