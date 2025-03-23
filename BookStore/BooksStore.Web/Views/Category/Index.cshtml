@@ -1,37 +1,27 @@
-﻿@model IEnumerable<BooksStore.Web.ViewModels.ProductViewModel>
+﻿@model IEnumerable<BooksStore.Web.Models.Category>
 
 @{
-    ViewData["Title"] = "Продукты";
+    ViewData["Title"] = "Категории";
 }
 
-<h2>Список продуктов</h2>
+<h2>Список категорий</h2>
 
 <p>
-    <a asp-action="Create">Добавить новый продукт</a>
+    <a asp-action="Create">Добавить новую категорию</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProductName)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductDescription)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.CategoryDescription)
-            </th>*@
-            <th>Действия</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -39,29 +29,18 @@
         {
             <tr>
                 <td>
-                    @Html.HiddenFor(modelItem => item.ProductId)
-                    @Html.DisplayFor(modelItem => item.ProductName)
+                    @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <img src='data:image/png;base64,@Html.DisplayFor(modelItem => item.ProductImage)' height="50" />
+                    @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductPrice)
-                </td>
-                <td>
-                    @Html.HiddenFor(modelItem => item.CategoryId)
-                    @Html.DisplayFor(modelItem => item.CategoryName)
-                </td>
-                @*<td>
-                @Html.DisplayFor(modelItem => item.CategoryDescription)
-            </td>*@
-                <td>
-                    @Html.ActionLink("Описание", "Details", new { id = item.ProductId }) |
-                    @Html.ActionLink("Изменить", "Edit", new { id = item.ProductId }) |
-                    @Html.ActionLink("Удалить", "Delete", new { id = item.ProductId })
+                    @Html.ActionLink("Описание", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }

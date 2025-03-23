@@ -1,69 +1,36 @@
-﻿@model BooksStore.Web.ViewModels.ProductViewModel
+﻿@model BooksStore.Web.Models.Category
 
 @{
-    ViewData["Title"] = "Описание продукта";
+    ViewData["Title"] = "Описание категории";
 }
 
 <h2>Описание</h2>
 
 <div>
-    <h4>Продукт</h4>
+    <h4>Категории</h4>
     <hr />
-    <div>
-        <img src='data:image/png;base64,@Html.DisplayFor(model => model.ProductImage)' width="150" />
-    </div>
     <dl class="dl-horizontal">
-        @*<dt>
-            @Html.DisplayNameFor(model => model.ProductId)
-        </dt>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
         <dd>
-            @Html.HiddenFor(model => model.ProductId)
+            @Html.DisplayFor(model => model.Id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ProductName)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ProductDescription)
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ProductDescription)
-        </dd>
-        @*<dt>
-            @Html.DisplayNameFor(model => model.ProductImage)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ProductImage)
-        </dd>*@
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductPrice)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ProductPrice)
-        </dd>
-        @*<dt>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </dt>*@
-        <dd>
-            @Html.HiddenFor(model => model.CategoryId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryDescription)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CategoryDescription)
+            @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.ProductId }) |
+    @Html.ActionLink("Изменить", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Вернуться к продуктам</a>
 </div>

@@ -1,24 +1,21 @@
-﻿@model BooksStore.Web.Models.Product
+﻿@model BooksStore.Web.Models.Category
 
 @{
-    ViewData["Title"] = "Удалить продукт";
+    ViewData["Title"] = "Удалить категорию";
 }
 
 <h2>Удалить</h2>
 
 <h3>Вы уверены, что хотите сделать это?</h3>
 <div>
-    <h4>Продукт</h4>
+    <h4>Category</h4>
     <hr />
-    <div>
-        <img src='data:image/png;base64,@Html.DisplayFor(model => model.Image)' width="150" />
-    </div>
     <dl class="dl-horizontal">
-        @*<dt>
+        <dt>
             @Html.DisplayNameFor(model => model.Id)
-        </dt>*@
+        </dt>
         <dd>
-            @Html.HiddenFor(model => model.Id)
+            @Html.DisplayFor(model => model.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -32,28 +29,10 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-        @*<dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>*@
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        @*<dt>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </dt>*@
-        <dd>
-            @Html.HiddenFor(model => model.CategoryId)
-        </dd>
     </dl>
 
     <form asp-action="Delete">
-        <input type="submit" value="Удалить" class="btn btn-Primary" /> |
-        <a asp-action="Index">Вернуться к продуктам</a>
+        <input type="submit" value="Удалить" class="btn btn-default" /> |
+        <a asp-action="Index">Вернуться к списку категорий</a>
     </form>
 </div>
