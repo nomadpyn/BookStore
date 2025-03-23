@@ -1,5 +1,59 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BooksStore.Web.Models.Product
+
 @{
+    ViewData["Title"] = "Удалить продукт";
 }
+
+<h2>Удалить</h2>
+
+<h3>Вы уверены, что хотите сделать это?</h3>
+<div>
+    <h4>Продукт</h4>
+    <hr />
+    <div>
+        <img src='data:image/png;base64,@Html.DisplayFor(model => model.Image)' width="150" />
+    </div>
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>*@
+        <dd>
+            @Html.HiddenFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </dt>*@
+        <dd>
+            @Html.HiddenFor(model => model.CategoryId)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Удалить" class="btn btn-Primary" /> |
+        <a asp-action="Index">Вернуться к продуктам</a>
+    </form>
+</div>
