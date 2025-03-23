@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  postgres_db:
+    container_name: postgres_db
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=books_store_user
+      - POSTGRES_PASSWORD=b9o8o7k6s5t4o3r2e1
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
